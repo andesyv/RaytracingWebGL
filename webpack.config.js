@@ -5,17 +5,21 @@ module.exports = {
   entry: './src/main.ts',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'RaytracingWebGL',
       template: 'src/index.html'
     }),
   ],
   mode: 'production',
+  target: 'node',
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.glsl$/i,
+        use: 'raw-loader'
       },
     ],
   },

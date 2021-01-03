@@ -1,4 +1,6 @@
+// Inspiration: https://threejsfundamentals.org/threejs/lessons/threejs-shadertoy.html
 import * as Three from 'three';
+import shaderCode from './shader.glsl';
 
 const main = () => {
   const canvas = document.querySelector<HTMLCanvasElement>('#c');
@@ -11,13 +13,22 @@ const main = () => {
   const camera = new Three.OrthographicCamera(-1, 1, 1, -1, -1, 1);
   const scene = new Three.Scene();
   const plane = new Three.PlaneBufferGeometry(2, 2);
-  const material = new Three.MeshBasicMaterial({
-    color: 'red',
+  const uniforms = {
+    iTime: { value: 0 },
+    iResolution: { value: new Three.Vector3() },
+  };
+  const material = new Three.ShaderMaterial({
+    fragmentShader: shaderCode,
+    uniforms: uniforms,
   });
   scene.add(new Three.Mesh(plane, material));
 
-  const render = () => {
+  const render = (time: number) => {
     resizeRendererToDisplaySize(renderer);
+
+    const canvas = renderer.domElement;
+    uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
+    uniforms.iTime.value = time * 0.001; // Time is in milliseconds
 
     renderer.render(scene, camera);
 
