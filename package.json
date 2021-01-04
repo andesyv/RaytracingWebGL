@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "lint": "eslint src/*.{js,ts,tsx} --fix",
+    "lint": "eslint src/*.{js,ts,tsx}",
     "build": "rm -rf build && webpack",
     "deploy": "gh-pages -d build",
     "dev": "webpack --watch --mode=development"
