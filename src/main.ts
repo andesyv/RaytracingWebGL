@@ -60,7 +60,7 @@ const resizeRendererToDisplaySize = (renderer: Three.WebGLRenderer): boolean => 
 const getMousePosition = (event: MouseEvent, element: Element): Three.Vector4 => {
   return new Vector4(
     event.clientX - element.getBoundingClientRect().left,
-    event.clientY - element.getBoundingClientRect().top,
+    element.getBoundingClientRect().bottom - event.clientY,
     0,
     0
   );
