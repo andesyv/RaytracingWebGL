@@ -1,7 +1,6 @@
 // By Anders Syvertsen
 #include <common>
 
-// #iChannel0 'file://skysphere.jpg'
 
 struct Sphere {
     vec3 p;
@@ -12,6 +11,8 @@ struct Sphere {
 uniform vec3 iResolution;
 uniform vec4 iMouse;
 uniform float iTime;
+// #iChannel0 'file://skysphere.jpg'
+uniform sampler2D iChannel0;
 
 // Game Physics Cookbook, Gabor Szauer, 2017, 10.1
 float raySphere(vec3 rOrigin, vec3 rDir, Sphere s) {
@@ -99,7 +100,7 @@ void main()
             // Else, unobstructed path to light, add some color
             else {
                 // vec3 phong = texture(iChannel0, texCoords).rgb * spheres[closestSphere].color * (max(dot(lightDir, normal), 0.0) + 0.15)
-                vec3 phong = spheres[closestSphere].color * (max(dot(lightDir, normal), 0.0) + 0.15);
+                vec3 phong = spheres[closestSphere].color * max(dot(lightDir, normal), 0.1);
                 // Color is additively added with each bounce adding 0.5 times less
                 finalColor += phong * pow(0.75, float(bounce+1));
             }
@@ -111,5 +112,5 @@ void main()
     }
 
     // Output to screen
-    gl_FragColor = vec4(finalColor, 1.0);
+    gl_FragColor = vec4(texture(iChannel0, uv).rgb, 1.0);
 }

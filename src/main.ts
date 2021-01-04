@@ -2,12 +2,7 @@
 import * as Three from 'three';
 import { Vector4 } from 'three';
 import shaderCode from './shader.glsl';
-
-const uniforms: { [uniform: string]: { value: any } } = {
-  iTime: { value: 0 },
-  iResolution: { value: new Three.Vector3() },
-  iMouse: { value: new Three.Vector4() },
-};
+import skysphereAsset from './resources/skysphere.jpg';
 
 const main = () => {
   const canvas = document.querySelector<HTMLCanvasElement>('#c');
@@ -20,7 +15,18 @@ const main = () => {
   const camera = new Three.OrthographicCamera(-1, 1, 1, -1, -1, 1);
   const scene = new Three.Scene();
   const plane = new Three.PlaneBufferGeometry(2, 2);
-
+  const loader = new Three.TextureLoader();
+  const texture = loader.load(skysphereAsset.default);
+  texture.minFilter = Three.NearestFilter;
+  texture.magFilter = Three.NearestFilter;
+  texture.wrapS = Three.RepeatWrapping;
+  texture.wrapT = Three.RepeatWrapping;
+  const uniforms: { [uniform: string]: { value: any } } = {
+    iTime: { value: 0 },
+    iResolution: { value: new Three.Vector3() },
+    iMouse: { value: new Three.Vector4() },
+    iChannel0: { value: texture },
+  };
   const material = new Three.ShaderMaterial({
     fragmentShader: shaderCode,
     uniforms: uniforms,

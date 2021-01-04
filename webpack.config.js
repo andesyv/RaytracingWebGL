@@ -21,6 +21,10 @@ module.exports = {
         test: /\.glsl$/i,
         use: 'raw-loader'
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
