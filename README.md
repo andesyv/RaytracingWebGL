@@ -1,4 +1,7 @@
 # Raytracing WebGL
+![GitHub Pages Deploy CI](https://github.com/andesyv/RaytracingWebGL/workflows/GitHub%20Pages%20Deploy%20CI/badge.svg)
+[![GitHub license](https://img.shields.io/github/license/andesyv/RaytracingWebGL)](https://github.com/andesyv/RaytracingWebGL/blob/master/LICENSE)
+
 A shadertoy raytracing shader hosted using WebGL, Webpack and GitHub pages.
 Check out the result: [andesyv.github.io/RaytracingWebGL/](https://andesyv.github.io/RaytracingWebGL/)
 
@@ -28,5 +31,5 @@ yarn build
 The script will run `webpack`, which again will run the typescript compiler and package
 everything into the `build` folder. The final result can be viewed in the `build/index.html` file.
 
-## Licence
-MIT Licence
+## License
+Project is licensed under a standard [MIT License](LICENSE).
