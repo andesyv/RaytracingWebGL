@@ -16,7 +16,7 @@ const main = () => {
   const scene = new Three.Scene();
   const plane = new Three.PlaneBufferGeometry(2, 2);
   const loader = new Three.TextureLoader();
-  const texture = loader.load(skysphereAsset.default);
+  const texture = loader.load(skysphereAsset);
   texture.minFilter = Three.NearestFilter;
   texture.magFilter = Three.NearestFilter;
   texture.wrapS = Three.RepeatWrapping;
