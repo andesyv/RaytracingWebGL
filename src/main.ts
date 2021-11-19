@@ -55,8 +55,8 @@ const main = () => {
   requestAnimationFrame(render);
 };
 
-const Vector3OrNull = (param: unknown): Three.Vector2 | null =>
-  param instanceof Three.Vector2 ? param : null;
+const Vector3OrNull = (param: unknown): Three.Vector3 | null =>
+  param instanceof Three.Vector3 ? param : null;
 
 const resizeRendererToDisplaySize = (renderer: Three.WebGLRenderer): boolean => {
   const canvas = renderer.domElement;
