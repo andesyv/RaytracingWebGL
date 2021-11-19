@@ -21,7 +21,10 @@ const main = () => {
   texture.magFilter = Three.NearestFilter;
   texture.wrapS = Three.RepeatWrapping;
   texture.wrapT = Three.RepeatWrapping;
-  const uniforms: { [uniform: string]: { value: any } } = {
+  const uniforms: Record<
+    string,
+    Three.IUniform<number | Three.Vector3 | Three.Vector4 | Three.Texture>
+  > = {
     iTime: { value: 0 },
     iResolution: { value: new Three.Vector3() },
     iMouse: { value: new Three.Vector4() },
@@ -41,7 +44,7 @@ const main = () => {
     resizeRendererToDisplaySize(renderer);
 
     const canvas = renderer.domElement;
-    uniforms.iResolution.value.set(canvas.width, canvas.height, 1);
+    Vector3OrNull(uniforms.iResolution.value)?.set(canvas.width, canvas.height, 1);
     uniforms.iTime.value = time * 0.001; // Time is in milliseconds
 
     renderer.render(scene, camera);
@@ -51,6 +54,9 @@ const main = () => {
 
   requestAnimationFrame(render);
 };
+
+const Vector3OrNull = (param: unknown): Three.Vector2 | null =>
+  param instanceof Three.Vector2 ? param : null;
 
 const resizeRendererToDisplaySize = (renderer: Three.WebGLRenderer): boolean => {
   const canvas = renderer.domElement;
